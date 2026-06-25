@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Trivia del CPAP - TOTALSLEEP</title>
+    <meta name="description" content="Aceptá el desafío, convertite en el Campeón del CPAP y ganá premios increíbles con TOTALSLEEP. ¡Demostrá tus conocimientos sobre higiene y cuidado del sueño!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Card Wrapper -->
+        <main class="card-glass" id="main-card">
+            
+            <!-- SECTION 1: WELCOME SCREEN -->
+            <section id="screen-welcome" class="screen">
+                <div class="brand-header">
+                    <img src="assets/logo.png" alt="Logo TOTALSLEEP" class="logo" id="totalsleep-logo">
+                </div>
+                <div class="content-body text-center">
+                    <div class="badge-worldcup-mini">
+                        <i class="fa-solid fa-trophy golden-glow"></i> Desafío Mundialista
+                    </div>
+                    <h1 class="main-title">La Trivia del CPAP</h1>
+                    <p class="subtitle">¿Estás listo para convertirte en el <strong>Campeón del Sueño</strong> y ganarte un premio?</p>
+                    
+                    <div class="graphic-3d-placeholder">
+                        <!-- Custom CSS/SVG soccer ball and CPAP mask hybrid animation -->
+                        <div class="sleep-champion-badge">
+                            <span class="badge-icon">⚽</span>
+                            <span class="badge-plus">+</span>
+                            <span class="badge-icon">💨</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="btn-welcome-next">
+                        Aceptar el Desafío <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 2: RULES SCREEN -->
+            <section id="screen-rules" class="screen d-none">
+                <div class="brand-header">
+                    <img src="assets/logo.png" alt="Logo TOTALSLEEP" class="logo-small">
+                </div>
+                <div class="content-body">
+                    <h2 class="section-title text-center"><i class="fa-solid fa-scroll text-teal"></i> Reglas del Torneo</h2>
+                    <ul class="rules-list">
+                        <li>
+                            <div class="rule-icon"><i class="fa-solid fa-futbol"></i></div>
+                            <div class="rule-text">Respondé correctamente <strong>3 preguntas</strong> consecutivas para meter el gol de campeonato.</div>
+                        </li>
+                        <li>
+                            <div class="rule-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                            <div class="rule-text">Tenés exactamente <strong>45 segundos</strong> por cada pregunta para patear tu penal.</div>
+                        </li>
+                        <li>
+                            <div class="rule-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                            <div class="rule-text">Contás con <strong>3 vidas</strong> (chances) en total. ¡No hagas trampa!</div>
+                        </li>
+                        <li>
+                            <div class="rule-icon"><i class="fa-solid fa-gift"></i></div>
+                            <div class="rule-text">Si ganás sin agotar tus vidas, te llevarás un **obsequio especial** de TOTALSLEEP.</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="action-bar text-center">
+                        <button class="btn btn-success btn-large pulse-animation" id="btn-start-game">
+                            ¡Preparados, listos, ya! <i class="fa-solid fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: GAME SCREEN -->
+            <section id="screen-game" class="screen d-none">
+                <!-- Status bar with lives, shootout progress and timer -->
+                <div class="game-status-bar">
+                    <div class="status-item lives" id="game-lives" aria-label="Vidas restantes">
+                        <span class="heart active"><i class="fa-solid fa-heart"></i></span>
+                        <span class="heart active"><i class="fa-solid fa-heart"></i></span>
+                        <span class="heart active"><i class="fa-solid fa-heart"></i></span>
+                    </div>
+                    
+                    <div class="status-item penalty-shootout" id="shootout-progress" aria-label="Progreso de penales">
+                        <span class="shootout-ball" data-step="1"><i class="fa-regular fa-circle"></i></span>
+                        <span class="shootout-ball" data-step="2"><i class="fa-regular fa-circle"></i></span>
+                        <span class="shootout-ball" data-step="3"><i class="fa-regular fa-circle"></i></span>
+                    </div>
+                    
+                    <div class="status-item timer" id="game-timer" aria-label="Tiempo restante">
+                        <div class="timer-circle">
+                            <span id="timer-text">45</span>
+                            <small>s</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-body">
+                    <!-- Progress line -->
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="game-progress-fill"></div>
+                        <div class="progress-ball-runner" id="game-progress-ball">⚽</div>
+                    </div>
+
+                    <div class="question-container">
+                        <div class="question-number" id="question-header">Pregunta X de Y</div>
+                        <h2 class="question-text" id="question-title">Cargando pregunta...</h2>
+                    </div>
+
+                    <div class="options-container" id="options-list">
+                        <!-- Options buttons will be injected here dynamically -->
+                    </div>
+                </div>
+
+                <!-- FEEDBACK MODAL OVERLAY (INSIDE GAME CARD FOR METRIC INTEGRATION) -->
+                <div class="feedback-overlay d-none" id="game-feedback">
+                    <div class="feedback-content card-glass">
+                        <!-- Correct: Goal Animation Content -->
+                        <div class="feedback-state feedback-success d-none" id="feedback-correct-state">
+                            <div class="goal-net-animation">
+                                <div class="goal-posts">
+                                    <div class="soccer-ball-fly">⚽</div>
+                                </div>
+                            </div>
+                            <h3 class="feedback-title text-success glow-text">¡GOOOOOOL! ⚽</h3>
+                            <p class="feedback-text text-center">¡Definición espectacular al ángulo! Excelente respuesta.</p>
+                            <button class="btn btn-success" id="btn-feedback-next">
+                                Siguiente pregunta <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Incorrect/Timeout: Missed Animation Content -->
+                        <div class="feedback-state feedback-error d-none" id="feedback-incorrect-state">
+                            <div class="missed-animation">
+                                <div class="referee-card">🟨</div>
+                            </div>
+                            <h3 class="feedback-title text-danger" id="feedback-error-title">¡La pelota dio en el palo! 🧤</h3>
+                            <p class="feedback-text text-center" id="feedback-error-text">La respuesta no es correcta. ¡Pero no te rindas!</p>
+                            
+                            <div class="hint-container">
+                                <span class="hint-badge"><i class="fa-solid fa-lightbulb"></i> PISTA CLÍNICA</span>
+                                <p class="hint-text" id="feedback-hint">Aquí irá la pista médica para ayudar al usuario...</p>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="btn-feedback-retry">
+                                Volver a patear <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: WATER BREAK SCREEN -->
+            <section id="screen-water-break" class="screen d-none">
+                <div class="brand-header">
+                    <img src="assets/logo.png" alt="Logo TOTALSLEEP" class="logo-small">
+                </div>
+                <div class="content-body text-center">
+                    <div class="water-glass-animation">
+                        <div class="glass-container">
+                            <div class="water-fill"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                        </div>
+                        <span class="water-drop-icon">💧</span>
+                    </div>
+                    
+                    <h2 class="section-title mt-3">Pausa para tomar agua</h2>
+                    <p class="subtitle font-italic">"La hidratación y una buena rutina diaria son fundamentales para un sueño reparador y una terapia de CPAP confortable."</p>
+                    
+                    <p class="explanation">Llevás 2 goles metidos. El arquero se prepara para el último tiro decisivo. Tomá un trago de agua, concentrate y preparate para el penal final.</p>
+                    
+                    <button class="btn btn-success btn-large" id="btn-continue-last">
+                        Continuar con la última pregunta <i class="fa-solid fa-futbol"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 5: WIN SCREEN (VICTORY) -->
+            <section id="screen-win" class="screen d-none">
+                <div class="brand-header">
+                    <img src="assets/logo.png" alt="Logo TOTALSLEEP" class="logo-small">
+                </div>
+                <div class="content-body text-center">
+                    <div class="trophy-container">
+                        <div class="trophy-wrapper">
+                            <i class="fa-solid fa-trophy trophy-gold animate-bounce"></i>
+                            <div class="trophy-stars">⭐ ⭐ ⭐</div>
+                        </div>
+                    </div>
+                    
+                    <h1 class="win-title glow-gold">¡CAMPEÓN DEL SUEÑO!</h1>
+                    <p class="win-subtitle">Metiste los 3 penales y completaste la trivia con éxito.</p>
+                    
+                    <!-- Reward Card -->
+                    <div class="prize-card">
+                        <span class="prize-badge"><i class="fa-solid fa-gift"></i> TU REGALO</span>
+                        <div class="prize-visual-icon" id="prize-icon">
+                            <!-- Injected dynamically with 3D-like styling SVG -->
+                        </div>
+                        <h3 class="prize-name" id="won-prize-name">Premio Especial</h3>
+                        <p class="prize-validity"><i class="fa-regular fa-calendar-days"></i> Válido por 30 días</p>
+                    </div>
+
+                    <div class="clinical-alert-card">
+                        <div class="alert-icon"><i class="fa-solid fa-camera"></i></div>
+                        <div class="alert-text"><strong>IMPORTANTE:</strong> Sacale una captura de pantalla a esta pantalla para canjear tu premio.</div>
+                    </div>
+
+                    <!-- WhatsApp Dynamic Claim Button -->
+                    <div class="claim-container">
+                        <div class="whatsapp-status" id="wpp-status-badge">
+                            <span class="status-dot"></span> <span id="wpp-status-text">Validando horario...</span>
+                        </div>
+                        <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-claim-wpp">
+                            <i class="fa-brands fa-whatsapp"></i> Canjear Regalo por WhatsApp
+                        </a>
+                        <small class="claim-disclaimer">Canjeable en el horario de atención de Lunes a Viernes de 10 a 20 hs.</small>
+                    </div>
+
+                    <!-- Social Media Sharing -->
+                    <div class="share-section">
+                        <span class="share-title">¡Compartí tu logro!</span>
+                        <div class="share-buttons">
+                            <a href="https://instagram.com" target="_blank" class="btn-share instagram" id="share-instagram" aria-label="Compartir en Instagram">
+                                <i class="fa-brands fa-instagram"></i> Instagram
+                            </a>
+                            <a href="https://facebook.com" target="_blank" class="btn-share facebook" id="share-facebook" aria-label="Compartir en Facebook">
+                                <i class="fa-brands fa-facebook"></i> Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: LOSE SCREEN (DEFEAT) -->
+            <section id="screen-lose" class="screen d-none">
+                <div class="brand-header">
+                    <img src="assets/logo.png" alt="Logo TOTALSLEEP" class="logo-small">
+                </div>
+                <div class="content-body text-center">
+                    <div class="lose-graphic">
+                        <div class="whistle-animation">
+                            <i class="fa-solid fa-circle-exclamation text-danger red-glow-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <h2 class="lose-title">¡Fin del Partido!</h2>
+                    <p class="lose-subtitle">Te quedaste sin vidas en esta ronda.</p>
+                    
+                    <div class="lose-quote">
+                        <p>"Lo hiciste muy bien, no te desanimes. Aprender sobre el CPAP es el primer paso para dormir mejor."</p>
+                    </div>
+                    
+                    <p class="instructions">¡Volvé a entrenar y patear! La salud del sueño es un camino de constancia.</p>
+                    
+                    <button class="btn btn-primary btn-large" id="btn-restart-game">
+                        Volver a Intentarlo <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Application Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 TOTALSLEEP - Especialistas en Medicina del Sueño y CPAP.</p>
+        </footer>
+    </div>
+    
+    <!-- Custom Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
