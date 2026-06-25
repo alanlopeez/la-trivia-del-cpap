@@ -1,5 +1,8 @@
 # ⚽ La Trivia del CPAP - TOTALSLEEP 💤
 
+> **Sitio Web Publicado**: [la-trivia-del-cpap-totalsleep.vercel.app](https://la-trivia-del-cpap-totalsleep.vercel.app)  
+> **Repositorio de GitHub**: [github.com/alanlopeez/la-trivia-del-cpap](https://github.com/alanlopeez/la-trivia-del-cpap)
+
 Una aplicación web interactiva, moderna y lúdica diseñada para educar a los usuarios sobre el uso correcto del equipo de CPAP y la higiene del sueño. La app está estructurada con una estética **clínica limpia y minimalista** combinada con divertidas **mecánicas mundialistas de tanda de penales**.
 
 ---
@@ -77,11 +80,11 @@ git commit -m "feat: inicializar trivia cpap totalsleep"
 ### Paso 2: Crear el repositorio en GitHub
 1. Entra a tu cuenta en [GitHub](https://github.com).
 2. Haz clic en **New** (Nuevo repositorio).
-3. Nómbralo (por ejemplo, `trivia-cpap-totalsleep`). Déjalo en público o privado y haz clic en **Create repository**.
+3. Nómbralo (por ejemplo, `la-trivia-del-cpap`). Déjalo en público o privado y haz clic en **Create repository**.
 4. Copia las líneas que te brinda GitHub bajo el título *“…or push an existing repository from the command line”*. Serán similares a estas:
 ```bash
 git branch -M main
-git remote add origin https://github.com/TU_USUARIO/trivia-cpap-totalsleep.git
+git remote add origin https://github.com/TU_USUARIO/la-trivia-del-cpap.git
 git push -u origin main
 ```
 *(Reemplaza `TU_USUARIO` con tu nombre de usuario real de GitHub).*
@@ -89,7 +92,7 @@ git push -u origin main
 ### Paso 3: Publicar en Vercel (Gratis y Automático)
 1. Regístrate o inicia sesión en [Vercel](https://vercel.com) (puedes ingresar directamente con tu cuenta de GitHub).
 2. Haz clic en el botón **Add New...** y luego en **Project** (Proyecto).
-3. En la lista de repositorios, busca `trivia-cpap-totalsleep` y haz clic en **Import** (Importar).
+3. En la lista de repositorios, busca `la-trivia-del-cpap` y haz clic en **Import** (Importar).
 4. Deja la configuración predeterminada tal como está (Vercel detecta automáticamente que es un sitio estático HTML/CSS/JS).
 5. Haz clic en **Deploy** (Desplegar).
 6. ¡Listo! En menos de 20 segundos tendrás tu aplicación web publicada con un enlace público HTTPS para compartir. Cada vez que actualices tu código en GitHub, Vercel actualizará tu sitio web automáticamente.
