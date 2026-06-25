@@ -724,9 +724,9 @@ function triggerWin() {
     const isWppOpen = checkBusinessHours();
     
     // Setup WhatsApp claim link
-    // Number: 113776158 (Argentina prefix 549113776158)
+    // Number: 1137776158 (Argentina prefix 5491137776158)
     const baseText = `Hola, me gané ${selectedPrize.wppText} y me gustaría canjearlo.`;
-    const wppUrl = `https://wa.me/549113776158?text=${encodeURIComponent(baseText)}`;
+    const wppUrl = `https://wa.me/5491137776158?text=${encodeURIComponent(baseText)}`;
     dom.btnClaimWpp.setAttribute('href', wppUrl);
     
     showScreen('win');
