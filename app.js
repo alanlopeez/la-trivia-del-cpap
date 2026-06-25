@@ -136,7 +136,7 @@ const QUESTION_BANK = [
     },
     {
         id: 13,
-        text: "¿Cada cuánto tiempo se deben cambiar los filtros de aire estándar o polen (habitualmente lavables o de espuma gris)?",
+        text: "¿Cada cuánto tiempo se deben cambiar los filtros de aire estándar de tu equipo de CPAP?",
         options: [
             "Al menos cada 6 meses de uso continuo (o lavarse/cambiarse según indique el fabricante).",
             "Cada 5 años.",
@@ -452,14 +452,14 @@ function initEvents() {
     // Social Share buttons config
     dom.shareInstagram.addEventListener('click', (e) => {
         e.preventDefault();
-        alert("¡Sacale una captura de pantalla a este logro y subila a tus historias de Instagram etiquetando a @totalsleep!");
+        alert("¡Sacale una captura de pantalla a este logro y subila a tus historias de Instagram etiquetando a @totalsleep_arg!");
+        window.open("https://www.instagram.com", "_blank");
     });
 
     dom.shareFacebook.addEventListener('click', (e) => {
         e.preventDefault();
-        const shareText = `¡Soy el Campeón del Sueño de TOTALSLEEP! Respondí la trivia de CPAP y me gané: ${selectedPrize ? selectedPrize.name : 'un premio especial'}.`;
-        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareText)}`;
-        window.open(url, '_blank');
+        alert("¡Sacale una captura de pantalla a este logro y compartila en Facebook etiquetando a @totalsleep.arg!");
+        window.open("https://www.facebook.com", "_blank");
     });
 }
 
@@ -480,8 +480,14 @@ function showScreen(screenKey) {
 function startGame() {
     resetGameState();
     
-    // Seleccionar 3 preguntas aleatorias únicas
-    const shuffled = [...QUESTION_BANK].sort(() => 0.5 - Math.random());
+    // Seleccionar 3 preguntas aleatorias únicas (Fisher-Yates shuffle)
+    const shuffled = [...QUESTION_BANK];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+    }
     currentQuestions = shuffled.slice(0, 3);
     
     showScreen('game');
